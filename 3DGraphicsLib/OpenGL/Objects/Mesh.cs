@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Platform.Windows;
 
 namespace _3DGraphicsLib.OpenGL.Objects
 {
@@ -15,20 +16,27 @@ namespace _3DGraphicsLib.OpenGL.Objects
         private int[] _indices;
         private float[] _vertexData;
 
-        public Mesh(float[] vertexData, int[] indices)
+        private Texture _tex;
+
+        public Mesh(float[] vertexData, int[] indices, Texture tex)
         {
             _vertexData = vertexData;
             _indices = indices;
+            _tex = tex;
 
             //Console.WriteLine($"{vertexData[0]}  {vertexData[1]}  {vertexData[2]}");
             //Console.WriteLine($"{vertexData[3]}  {vertexData[4]}  {vertexData[5]}");
             //Console.WriteLine($"{vertexData[6]}  {vertexData[7]}");
+
+
 
             SetupMesh();
         }
 
         public void Draw(Shader shader)
         {
+            _tex.Use(TextureUnit.Texture0);
+
             GL.BindVertexArray(_vao);
             GL.DrawElements(PrimitiveType.Triangles, _indices.Length, DrawElementsType.UnsignedInt, 0);
 

@@ -12,6 +12,7 @@ namespace _3DGraphicsLib.OpenGL.Objects
 {
     class Model
     {
+        private Texture tex = Texture.LoadFromFile("assets/models/backpack/diffuse.jpg");
         public List<Mesh> meshes = new List<Mesh>();
 
         public Model(string path)
@@ -62,9 +63,11 @@ namespace _3DGraphicsLib.OpenGL.Objects
                     vertexData.Add(mesh.Normals[i].Z);
                 }
 
-                // temp texture coords
-                vertexData.Add(0f);
-                vertexData.Add(0f);
+                if (mesh.HasTextureCoords(0))
+                {
+                    vertexData.Add(mesh.TextureCoordinateChannels[0][i].X);
+                    vertexData.Add(mesh.TextureCoordinateChannels[0][i].Y);
+                }
             }
 
             for (int i = 0; i < mesh.FaceCount; i++)
@@ -76,7 +79,7 @@ namespace _3DGraphicsLib.OpenGL.Objects
                 }
             }
 
-            return new Mesh(vertexData.ToArray(), indices.ToArray());
+            return new Mesh(vertexData.ToArray(), indices.ToArray(), tex);
         }
     }
 }
