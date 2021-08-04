@@ -28,8 +28,8 @@ namespace _3DGraphicsLib.OpenGL
             if (code != (int)All.True)
                 throw new Exception($"Error occurred whilst linking Program({Handle})");
 
-            GL.DetachShader(Handle, vertexShader);
-            GL.DetachShader(Handle, fragmentShader);
+            //GL.DetachShader(Handle, vertexShader);
+            //GL.DetachShader(Handle, fragmentShader);
             GL.DeleteShader(vertexShader);
             GL.DeleteShader(fragmentShader);
 
