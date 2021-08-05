@@ -364,4 +364,4 @@ FodyWeavers.xsd
 
 ## CUSTOMS
 backup/**
-!assets/**.obj
+!3DGraphicsLib/assets/**
